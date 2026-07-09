@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { FormEvent } from "react";
-import { api, getPublicAssetUrl } from "@/lib/api";
+import { api, getApiBaseUrl, getPublicAssetUrl } from "@/lib/api";
 import type { ApiResponse, SubmissionRecord } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -168,7 +168,7 @@ export function AdminDashboard() {
                 ) : (
                   rows.map((row, index) => {
                     const publicUrl = getPublicAssetUrl(row.attachmentPath);
-                    const downloadUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5050/api"}/submissions/${row.id}/download`;
+                    const downloadUrl = `${getApiBaseUrl()}/submissions/${row.id}/download`;
                     const zebra = index % 2 === 0 ? "bg-white" : "bg-slate-50";
 
                     return (

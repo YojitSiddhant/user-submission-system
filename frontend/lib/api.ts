@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5050/api";
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 export const api = axios.create({
   baseURL,
@@ -12,4 +12,8 @@ export const api = axios.create({
 export function getPublicAssetUrl(assetPath: string) {
   const origin = baseURL.replace(/\/api$/, "");
   return `${origin}/${assetPath.replace(/^\//, "")}`;
+}
+
+export function getApiBaseUrl() {
+  return baseURL;
 }
