@@ -2,15 +2,15 @@ const mysql = require("mysql2/promise");
 const env = require("./env");
 
 const pool = mysql.createPool({
-  ...(env.dbSocket
-    ? { socketPath: env.dbSocket }
+  ...(env.dbConfig.socketPath
+    ? { socketPath: env.dbConfig.socketPath }
     : {
-        host: env.dbHost,
-        port: Number(env.dbPort),
+        host: env.dbConfig.host,
+        port: env.dbConfig.port,
       }),
-  user: env.dbUser,
-  password: env.dbPassword,
-  database: env.dbName,
+  user: env.dbConfig.user,
+  password: env.dbConfig.password,
+  database: env.dbConfig.database,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
