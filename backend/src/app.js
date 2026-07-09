@@ -6,13 +6,14 @@ const submissionRoutes = require("./routes/submissionRoutes");
 const { notFound, errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
+const corsOptions = {
+  origin: env.frontendUrl,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+};
 
-app.use(
-  cors({
-    origin: env.frontendUrl,
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
